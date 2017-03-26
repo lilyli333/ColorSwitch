@@ -10,9 +10,10 @@ import java.awt.event.KeyEvent;
 public class ColorSwitch extends JPanel implements ActionListener, KeyListener {
 	private Ball b;
 	 private Belt belt;
-	 private Belt2 belt2;
+	 private Belt belt2;
 	private final int WIDTH = getWidth();
 	private final int HEIGHT = getHeight();
+	private boolean beltCrossed, belt2Crossed;
 
 	public ColorSwitch() {
 		JFrame w = new JFrame("Color Switch");
@@ -29,13 +30,15 @@ public class ColorSwitch extends JPanel implements ActionListener, KeyListener {
 
 		
 		 belt = new Belt(getWidth(), 200);
-		 belt2 = new Belt2 (getWidth(), 300);
+		 belt2 = new Belt (getWidth(), 300);
 		
 		 
 		 new Thread(()->{
 				while(true) {
 					// do whatever you want
 					repaint();
+					beltCrossed = belt.checkJump();
+					belt2Crossed = belt2.checkJump();
 					try {
 					Thread.sleep(100);
 					} catch(final InterruptedException x) {
@@ -56,10 +59,10 @@ public class ColorSwitch extends JPanel implements ActionListener, KeyListener {
 
 	public void actionPerformed(ActionEvent e) {
 		
-		while(b.getY() < getHeight()-10){
-			b.changeYPos(-5);
-			System.out.println("falling");
-		}
+//		while(b.getY() < getHeight()-10){
+//			b.jump();
+//			System.out.println("falling");
+//		}
 
 	}
 
@@ -71,7 +74,14 @@ public class ColorSwitch extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			b.jump(belt);
+			if(beltCrossed == false && belt2Crossed == false)
+				b.jump();
+			else{
+				 JOptionPane.showMessageDialog(null,
+		    	          "Gamed ended. Please play again",
+		    	          "Game end!", JOptionPane.ERROR_MESSAGE);
+				 return;
+			}
 			repaint();
 		}
 		System.out.println("hello");

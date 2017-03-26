@@ -5,7 +5,7 @@ public class Belt extends Obstacle
 {
 	private int yPos;
 	private static int windowX;
-	private static final int HEIGHT = 10;
+	private static final int HEIGHT = 20;
 	
 	public Belt(int x, int y)
 	{
@@ -24,5 +24,14 @@ public class Belt extends Obstacle
 	}
 	public int getBottomY(){
 		return yPos + HEIGHT;
+	}
+
+	public boolean checkJump(){
+		if (Ball.getY() <= getBottomY() && Ball.getColor() != getColor()) {
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }
