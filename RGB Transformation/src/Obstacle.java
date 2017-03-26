@@ -25,7 +25,7 @@ public class Obstacle implements ActionListener
 				in = (int) (Math.random()*3 + 1);
 				System.out.println("in is: " + in);
 				try {
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				//repaint();
 				} catch(final InterruptedException e) {
 					e.printStackTrace();

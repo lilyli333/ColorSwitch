@@ -29,7 +29,9 @@ public class Ball {
 //	}
 	
 	public void jump(){
-		yPos -= 10;
+		yPos-=10;
+		System.out.println("Jump");
+		//while (yPos >= )
 	}
 	
 	public void draw(Graphics g){
